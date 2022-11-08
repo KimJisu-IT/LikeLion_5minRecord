@@ -30,8 +30,9 @@ public class MemberController {
     }
 
     @GetMapping("/members/login")
-    public String login(LoginRequest loginRequest) {
-        memberService.login(loginRequest.getEmail(), loginRequest.getPw());
+    public MemberResponse login(LoginRequest loginRequest) {
+        Member member = memberService.login(loginRequest.getEmail(), loginRequest.getPw());
+        return member.toMemberResponse();
     }
 
 }
