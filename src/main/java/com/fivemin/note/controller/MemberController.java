@@ -18,7 +18,7 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping("/members/new")
+    @PostMapping("/members/signup")
     public String create(MemberForm form, BindingResult result) {
 
         if (result.hasErrors()) {
@@ -32,7 +32,7 @@ public class MemberController {
         return "redirect:/";
     }
 
-    @GetMapping("/members")
+    @GetMapping("/members/login")
     public String list(Model model) {
         List<Member> members = memberService.findMembers();
         model.addAttribute("members", members);
