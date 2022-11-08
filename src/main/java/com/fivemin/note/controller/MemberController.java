@@ -1,5 +1,6 @@
 package com.fivemin.note.controller;
 
+import com.fivemin.note.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.jni.Address;
 import org.aspectj.weaver.Member;
@@ -15,6 +16,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberController {
 
+    private final MemberService memberService;
+
     @GetMapping("/members/new")         // url
     public String createForm(Model model) {
         model.addAttribute("memberForm", new MemberForm());
@@ -22,17 +25,14 @@ public class MemberController {
     }
 
     @PostMapping("/members/new")
-    public String create(@Valid MemberForm form, BindingResult result) {
+    public String create(MemberForm form, BindingResult result) {
 
         if (result.hasErrors()) {
             return "members/createMemberForm";
         }
 
-        Address address = new Address(form.getCity(), form.getStreet(), form.getZipcode());
-
         Member member = new Member();
         member.setName(form.getName());
-        member.setAddress(address);
 
         memberService.join(member);
         return "redirect:/";

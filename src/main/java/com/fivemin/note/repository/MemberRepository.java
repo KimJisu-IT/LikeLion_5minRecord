@@ -13,7 +13,11 @@ public class MemberRepository {
 
     private final EntityManager em;
 
-    public void save(Member member) {
+    public void save(Member member) {   // 질문: 왜 save가 적용이 안 되는지 모르겠다
+        em.persist(member);
+    }
+
+    public void save(com.fivemin.note.domain.Member member) {
         em.persist(member);
     }
 

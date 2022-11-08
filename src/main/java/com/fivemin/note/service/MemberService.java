@@ -14,6 +14,7 @@ import java.util.List;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private Long memberId;
 
     /**
      * 회원 가입
@@ -34,13 +35,14 @@ public class MemberService {
     }
 
     //회원 전체 조회
-    public List<org.aspectj.weaver.Member> findMembers() {
+    private List<org.aspectj.weaver.Member> findMembers() {
         return memberRepository.findAll();
     }
 
     // 회원 일부 조회
-    public Member findOne(Long memberId) {
-        return memberRepository.findOne(memberId);
+    private Member findOne(Long memberId) {
+        this.memberId = memberId;
+        return (Member) memberRepository.findOne(memberId);
     }
 
 }
