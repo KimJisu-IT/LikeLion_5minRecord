@@ -18,19 +18,12 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @GetMapping("/members/new")         // url
-    public String createForm(Model model) {
-        model.addAttribute("memberForm", new MemberForm());
-        return "members/createMemberForm";
-    }
-
     @PostMapping("/members/new")
     public String create(MemberForm form, BindingResult result) {
 
         if (result.hasErrors()) {
             return "members/createMemberForm";
         }
-
 
         Member member = new Member();
         member.setName(member.getName());
