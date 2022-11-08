@@ -31,10 +31,11 @@ public class MemberController {
             return "members/createMemberForm";
         }
 
-        Member member = new Member();
-        member.setName(form.getName());
 
-        memberService.join(member);
+        Member member = new Member();
+        member.setName(member.getName());
+
+        memberService.join((com.fivemin.note.domain.Member) member);
         return "redirect:/";
     }
 
