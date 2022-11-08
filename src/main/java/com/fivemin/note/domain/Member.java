@@ -3,7 +3,6 @@ package com.fivemin.note.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.tomcat.jni.Address;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
 
-    private String nickname;
+    private String name;
 
     private String email;
 

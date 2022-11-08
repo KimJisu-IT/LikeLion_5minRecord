@@ -28,14 +28,14 @@ public class MemberService {
     }
 
     private void validateDuplicateMember(Member member) {
-        List<Member> findMembers = memberRepository.findByName(member.getName());
+        List<org.aspectj.weaver.Member> findMembers = memberRepository.findByName(member.getName());
         if (!findMembers.isEmpty()) {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
     }
 
     //회원 전체 조회
-    private List<org.aspectj.weaver.Member> findMembers() {
+    public List<org.aspectj.weaver.Member> findMembers() {
         return memberRepository.findAll();
     }
 
