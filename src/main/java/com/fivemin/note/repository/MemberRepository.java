@@ -1,38 +1,17 @@
 package com.fivemin.note.repository;
 
-import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.Member;
+import com.fivemin.note.domain.Member;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
+// DB에 Data를 넣고 빼기
 @Repository
-@RequiredArgsConstructor
-public class MemberRepository {
+public interface MemberRepository extends JpaRepository<Member, Long> {
+    List<Member> findAllByName(String name);  // 한 개의 이름을 찾고 싶음: Optional<Today> findByMood(String mood);
+    // List<UniqueDay> findAllByText(String text);
 
-    private final EntityManager em;
-
-    public void save(Member member) {   // 질문: 왜 save가 적용이 안 되는지 모르겠다
-        em.persist(member);
-    }
-
-    public void save(com.fivemin.note.domain.Member member) {
-        em.persist(member);
-    }
-
-    public Member findOne(Long id) {
-        return em.find(Member.class, id);
-    }
-
-    public List<Member> findAll() {
-        return em.createQuery("select m from Member m", Member.class)
-                .getResultList();
-    }
-
-    public List<Member> findByName(String name) {
-        return em.createQuery("select m from Member m where m.name = :name", Member.class)
-                .setParameter("name", name)
-                .getResultList();
-    }
+    Optional<Member> findByEmailAndPw(String email, String pw);
 }

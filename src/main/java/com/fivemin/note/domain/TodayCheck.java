@@ -5,10 +5,10 @@ import javax.persistence.*;
 public class TodayCheck {
     @Id
     @GeneratedValue
-    @Column(name = "order_id")
+    @Column(name = "today_check_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "today_id")
     private Today today;
 

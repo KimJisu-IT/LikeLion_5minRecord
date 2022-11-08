@@ -1,9 +1,11 @@
 package com.fivemin.note.controller;
 
+import com.fivemin.note.Dto.LoginRequest;
+import com.fivemin.note.Dto.MemberForm;
+import com.fivemin.note.Dto.MemberResponse;
 import com.fivemin.note.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.jni.Address;
-import org.aspectj.weaver.Member;
+import com.fivemin.note.domain.Member;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,25 +20,18 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping("/members/signup")
-    public String create(MemberForm form, BindingResult result) {
+    @PostMapping("/members/signup")     // 회원가입
+    public MemberResponse create(MemberForm form) {
 
-        if (result.hasErrors()) {
-            return "members/createMemberForm";
-        }
+        Member member = new Member(form);
 
-        Member member = new Member();
-        member.setName(member.getName());
-
-        memberService.join((com.fivemin.note.domain.Member) member);
-        return "redirect:/";
+        memberService.join(member);     // controller -> service
+        return member.toMemberResponse();  //ctrl + alt + v
     }
 
     @GetMapping("/members/login")
-    public String list(Model model) {
-        List<Member> members = memberService.findMembers();
-        model.addAttribute("members", members);
-        return "members/memberList";
+    public String login(LoginRequest loginRequest) {
+        memberService.login(loginRequest.getEmail(), loginRequest.getPw());
     }
 
 }

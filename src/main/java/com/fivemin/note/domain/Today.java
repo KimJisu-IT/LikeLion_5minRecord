@@ -15,7 +15,7 @@ public class Today {
 
     @Id
     @GeneratedValue
-    @Column(name = "order_id")
+    @Column(name = "today_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -23,4 +23,6 @@ public class Today {
     private Member member;
 
     private String Memo;
+
+    //date -> timestamp 객체를 만들어서 상속
 }

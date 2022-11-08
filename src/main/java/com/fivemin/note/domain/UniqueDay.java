@@ -15,7 +15,7 @@ public class UniqueDay {
 
     @Id
     @GeneratedValue
-    @Column(name = "order_id")
+    @Column(name = "unique_day_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
